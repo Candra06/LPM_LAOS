@@ -1,0 +1,37 @@
+body {
+    background: #ffd89b;
+    background: -webkit-linear-gradient(to right, #ffd89b, #19547b);
+    background: linear-gradient(to right, #ffd89b, #19547b);
+    min-height: 100vh;
+}
+.jumbotron{
+    background-image: url("../img/jumbo.jpg");
+    background-size: cover;
+    color: white;
+    -webkit-box-shadow: -1px 2px 40px 10px rgba(0,0,0,0.75);
+    -moz-box-shadow: -1px 2px 40px 10px rgba(0,0,0,0.75);
+    box-shadow: -1px 2px 40px 10px rgba(0,0,0,0.75);
+}
+.form-control:focus{
+    box-shadow: none;
+}
+.thumbnail{
+    margin: 15px;
+    border-radius: 5px;
+    -webkit-box-shadow: -1px 2px 40px -8px rgba(0,0,0,0.75);
+    -moz-box-shadow: -1px 2px 40px -8px rgba(0,0,0,0.75);
+    box-shadow: -1px 2px 40px -8px rgba(0,0,0,0.75);
+}
+.thumbnail:hover{
+    cursor: pointer;
+}
+.menu{
+    background-color: #fff;
+}
+.btn-group{
+    margin-top: 25px;
+    margin-bottom: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40vw;
+}
