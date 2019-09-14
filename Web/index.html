@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="LPM">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,67 +8,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
-    <title>Document</title>
+    <title>Laos Package Manager</title>
 </head>
-<body>
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-4">
-                <h1>Logo</h1>
-            </div>
-        </div>
-        <div class="row">
-            <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-secondary">Aplikasi</button>
-                <button type="button" class="btn btn-secondary">Terinstal</button>
-                <button type="button" class="btn btn-secondary">Lainnya </button>
-            </div>
-        </div>
-        <form role="form" id="form-buscar">
-            <div class="form-group">
-                <div class="input-group">
-                    <input id="1" class="form-control" type="text" name="search" placeholder="Cari..." required/>
-                    <span class="input-group-btn">
-                        <button class="btn btn-warning" type="submit">
-                            <i class="glyphicon glyphicon-search" aria-hidden="true"></i> Cari
-                        </button>
-                    </span>
-                </div>
-            </div>
-        </form>
-        <div class="jumbotron jumbotron-fluid text-center">
-            <h1 class="display-3">Laos Package Manager</h1>
-            <h2><small>Kelola Paket Anda Disini</small></h2>
-        </div>
-        
-        <h1><small>Kategori</small></h1>
-        <div class="row">
-            
-            <div class="thumbnail col-3 bg-light text-center">
-                <p>Multimedia</p>
-            </div>
-
-            <div class="thumbnail col-3 bg-light text-center">
-                <p>Office</p>
-            </div>
-
-            <div class="thumbnail col-3 bg-light text-center">
-                <p>Office</p>
-            </div>
-
-            <div class="thumbnail col-3 bg-light text-center">
-                <p>Office</p>
-            </div>
-
-            <div class="thumbnail col-3 bg-light text-center">
-                <p>Office</p>
-            </div>
-            <div class="thumbnail col-3 bg-light text-center">
-                <p>Office</p>
-            </div>
-        </div>
-        
+<body ng-cloak>
+    <div class="container" ng-view>
     </div>
+
+    <script>window.fn = window.$ = window.jQuery = require('jquery')</script>
     <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/controllers/all.js"></script>
 </body>
+
 </html>
