@@ -17,5 +17,15 @@ lpm.config(['$routeProvider', '$locationProvider', function ($route, $locationPr
     controller: 'installedController'
   })
 
+  .when('/search', {
+    templateUrl: path.join(view, 'search.html'),
+    controller: 'searchController'
+  })
+
+  .when('/detail/:appName', {
+    templateUrl: path.join(view, 'detail.html'),
+    controller: 'detailController'
+  })
+
   .otherwise({ redirectTo: '/' })
 }])

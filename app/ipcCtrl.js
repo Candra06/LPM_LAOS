@@ -36,8 +36,17 @@ function ipcCtrl (app_config) {
     })
   })
 
+  /**
+   * Detail Package
+   */
+  ipcMain.on('detail-package', (e, packageName) => {
+    API.detailPackage(packageName).then((res) => {
+      e.reply('detail-package', res)
+    }, errHandler).catch(errHandler)
+  })
+
   ipcMain.on('download-package', (e, packageName) => {
-    API.downloadPackage(packageName.trim()).then((res) => {
+    API.downloadPackage(packageName).then((res) => {
       console.log(res)
       Notif.info(`Download ${packageName} telah dimulai`)
     }).catch(errHandler)
