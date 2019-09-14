@@ -1,16 +1,21 @@
-const { app, ipcRenderer } = require('electron')
+const path = require('path')
+var angular = require('angular')
+var view = path.join(__dirname, '..', 'Web', 'components')
+require('angular-route')
+var lpm = angular.module('LPM', ['ngRoute'])
 
-const searchBtn = document.getElementById('searchBtn')
-var oriSearchBtn = searchBtn.innerHTML;
+lpm.config(['$routeProvider', '$locationProvider', function ($route, $locationProvider) {
+  $locationProvider.hashPrefix('');
+  $route
+  .when('/', {
+    templateUrl: path.join(view, 'home.html'),
+    controller: 'homeController'
+  })
 
-searchBtn.addEventListener('click', (e) => {
-  e.preventDefault()
-  searchQuery = document.getElementById('search-query').value;
-  ipcRenderer.send('search-api', searchQuery)
-  searchBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...'  
-})
+  .when('/installed', {
+    templateUrl: path.join(view, 'installed.html'),
+    controller: 'installedController'
+  })
 
-ipcRenderer.on('search-api', (e, res) => {
-  console.log(res)
-  searchBtn.innerHTML = oriSearchBtn
-})
+  .otherwise({ redirectTo: '/' })
+}])

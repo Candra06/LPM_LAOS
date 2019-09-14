@@ -2,14 +2,15 @@ const {
   app,
   dialog,
   ipcMain,
-  BrowserWindow
+  BrowserWindow,
 } = require('electron')
 const path = require('path')
 const DownloadMgr = require('electron-download-manager')
+const Notif = require(path.join(__dirname, 'notification.js'))
+const ipcCtrl = require(path.join(__dirname, 'ipcCtrl.js'))
 
 var APP_DIR = app.getPath('userData')
 var PACKAGE_DIR = path.join(APP_DIR, 'archive')
-var API_LPM = require(path.join(__dirname, 'api.js'))
 var VIEW_DIR = path.resolve(__dirname, '..', 'Web')
 
 const app_config = {
@@ -17,22 +18,18 @@ const app_config = {
   APP_NAME: 'Laos Package Manager',
   API_URL: 'https://lpm-api.zhanang.id'
 }
-const API = new API_LPM(app_config)
 
 let mainWindow;
-DownloadMgr.register({
-  downloadFolder: PACKAGE_DIR
-});
 
-var errHandler = (err) => {
-  dialog.showErrorBox('Error!', err)
+function appInit() {
+  DownloadMgr.register({
+    downloadFolder: PACKAGE_DIR
+  });
+
+  createWindow()
+  ipcCtrl(app_config)
 }
 
-ipcMain.on('search-api', (e, arg) => {
-  API.searchPackage(arg).then((res) => {
-    e.reply('search-api', res)
-  }, errHandler)
-})
 
 /**
  * Splash Screen
@@ -54,13 +51,10 @@ function createSplashWindow() {
   splashWindow.webContents.on('did-finish-load', () => {
     splashWindow.show()
   })
-  splashWindow.on('closed', function () {
+  splashWindow.on('closed', () => {
     splashWindow = null;
   })
-  
-  ipcMain.on('online-status', (e, status) => {
-    e.returnValue = (status ? 'available' : 'unavailable')
-  })
+
   return splashWindow
 }
 
@@ -94,7 +88,7 @@ function createWindow() {
   })
 }
 
-app.on('ready', createWindow)
+app.on('ready', appInit)
 
 app.on('window-all-closed', function () {
   if (process.platform != 'darwin') app.quit();

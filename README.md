@@ -8,9 +8,20 @@ LPM membutuhkan [Node.js](https://nodejs.org/) v4+ dan [Electron](https://electr
 
 Clone repository dan install appnya.
 
+Windows development:
 ```sh
 $ git clone https://github.com/Candra06/LPM_LAOS.git
 $ cd LPM_LAOS
-$ npm install -d
-$ electron start
+$ npm install
+$ npm start
+```
+
+Linux:
+```sh
+$ git clone https://github.com/Candra06/LPM_LAOS.git
+$ cd LPM_LAOS
+$ npm install
+$ sudo chown root node_modules/electron/dist/chrome-sandbox
+$ sudo chmod 4755 node_modules/electron/dist/chrome-sandbox
+$ npm start
 ```
