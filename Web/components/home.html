@@ -13,13 +13,13 @@
     <a href="#/etc" ng-route="/etc" class="btn btn-secondary">Lainnya</a>
   </div>
 </div>
-<form role="form" id="form-search" method="#">
+<form role="form" ng-submit="search-app()" id="form-search" method="#">
   <div class="form-group">
     <div class="input-group">
       <input id="search-query" class="form-control" type="text" name="search-query" placeholder="Nama package"
         required />
       <span class="input-group-btn">
-        <button id="searchBtn" class="btn btn-warning" type="submit">
+        <button id="searchBtn" class="btn btn-warning"  type="submit">
           <i class="fa fa-search" aria-hidden="true"></i> Cari
         </button>
       </span>

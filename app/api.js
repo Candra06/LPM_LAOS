@@ -12,7 +12,7 @@ class API_LPM {
   
   /**
    * search ubuntu package by name
-   * 
+   * https://lpm-api.zhanang.id/detail.php?name=
    */
   searchPackage(query = '') {
     if (query == '') return
@@ -33,6 +33,22 @@ class API_LPM {
   downloadPackage(packageName) {
     return new Promise ((resolve, reject) => {
       const req = net.request( this.getQueryBuilder('mirror.php', `name=${packageName}`) )
+      req.on('response', (res) => {
+        res.on('data', (body) => {
+          resolve(JSON.parse(body))
+        })
+        res.on('error', (err) => {
+          reject(err)
+        })
+      })
+      req.end()
+    })
+  }
+
+  detailApp(query = ''){
+    if (query == '') return
+    return new Promise ((resolve, reject) => {
+      const req = net.request(this.getQueryBuilder('detail.php', `name=${query}`))
       req.on('response', (res) => {
         res.on('data', (body) => {
           resolve(JSON.parse(body))

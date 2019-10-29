@@ -42,6 +42,20 @@ function ipcCtrl (app_config) {
       Notif.info(`Download ${packageName} telah dimulai`)
     }).catch(errHandler)
   })
+
+  ipcMain.on('search-app', (e, appName) => {
+    API.searchApp(appName.trim()).then((res) => {
+      console.log(res)
+      Notif.info(`Search ${appName}`)
+    }).catch(errHandler)
+  })
+
+  ipcMain.on('detail-app', (e, appName) => {
+    API.detailApp(appName.trim()).then((res) => {
+      console.log(res)
+      Notif.info(`Detail ${appName}`)
+    }).catch(errHandler)
+  })
 }
 
 module.exports = ipcCtrl

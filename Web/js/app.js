@@ -17,5 +17,10 @@ lpm.config(['$routeProvider', '$locationProvider', function ($route, $locationPr
     controller: 'installedController'
   })
 
+  .when('/detail', {
+    templateUrl: path.join(view, 'installed.html'),
+    controller: 'installedController'
+  })
+
   .otherwise({ redirectTo: '/' })
 }])

@@ -7,11 +7,11 @@ lpm.controller('homeController', function ($scope) {
   searchBtn.on('click', (e) => {
     e.preventDefault()
     searchQuery = $('#search-query').val() //document.getElementById('search-query').value;
-    ipcRenderer.send('search-api', searchQuery)
+    ipcRenderer.send('search-app', searchQuery)
     searchBtn.html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...')
   })
 
-  ipcRenderer.on('search-api', (e, res) => {
+  ipcRenderer.on('search-app', (e, res) => {
     console.log(res)
     searchBtn.html(oriSearchBtn)
   })
