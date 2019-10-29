@@ -1,17 +1,59 @@
-<div class="row">
+<nav class="navbar navbar-expand-lg navbar-light bg-light nav_custom">
+  <div class="container">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        
+        <a class="nav-item nav-link" href="#">aplikasi</a>
+        <a class="nav-item nav-link" href="#/installed" ng-route="/installed" >Terinstal</a>
+        <a class="nav-item nav-link" href="#">lainnya</a>
+        
+      </div>
+    </div>
+  </div>
+
+</nav>
+<!-- <div class="row">
   <div class="col-sm-12">
     <div class="jumbotron jumbotron-fluid text-center">
       <h1 class="display-3">Laos Package Manager</h1>
       <h2><small>Kelola Paket Anda Disini</small></h2>
     </div>
   </div>
-</div>
-<div class="row">
+</div> -->
+
+<!-- <div class="row">
   <div class="btn-group" role="group" aria-label="Basic example">
     <a href="#/" ng-route="/" class="btn btn-secondary">Aplikasi</a>
     <a href="#/installed" ng-route="/installed" class="btn btn-secondary">Terinstal</a>
     <a href="#/etc" ng-route="/etc" class="btn btn-secondary">Lainnya</a>
-  </div>
+  </div> 
+</div> -->
+<div class="container">
+    <form role="form" id="form-search" method="#">
+        <div class="form-group">
+          <!-- <div class="input-group">
+            <input id="search-query" class="form-control" type="text" name="search-query" placeholder="Nama package"
+              required />
+            <span class="input-group-btn">
+              <button id="searchBtn" class="btn btn-warning" type="submit">
+                <i class="fa fa-search" aria-hidden="true"></i> Cari
+              </button>
+            </span>
+          </div> -->
+          <div class="input-group mb-3 input_custom">
+            <input id="search-query" type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+              <button id="searchBtn" type="submit" class="btn btn-outline-secondary" type="button">
+                <i class="fa fa-search" aria-hidden="true"></i> Cari
+              </button>
+            </div>
+          </div>
+        </div>
+      </form> 
+      <h1><small>Kategori</small></h1>  
 </div>
 <form role="form" ng-submit="search-app()" id="form-search" method="#">
   <div class="form-group">
@@ -27,29 +69,40 @@
   </div>
 </form>
 
-<h1><small>Kategori</small></h1>
-<div class="row">
 
-  <div class="thumbnail col-3 bg-light text-center">
-    <p>Multimedia</p>
-  </div>
 
-  <div class="thumbnail col-3 bg-light text-center">
-    <p>Office</p>
-  </div>
-
-  <div class="thumbnail col-3 bg-light text-center">
-    <p>Office</p>
-  </div>
-
-  <div class="thumbnail col-3 bg-light text-center">
-    <p>Office</p>
-  </div>
-
-  <div class="thumbnail col-3 bg-light text-center">
-    <p>Office</p>
-  </div>
-  <div class="thumbnail col-3 bg-light text-center">
-    <p>Office</p>
-  </div>
+<div class="container">
+    <div class="row">
+        <div class="col-md">
+          <div class="card box" >
+            
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div></div>
+        <div class="col-md">
+            <div class="card box" >
+                
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div>
+        </div>
+        <div class="col-md">
+            <div class="card box" >
+                
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div>
+        </div>
+      </div>
 </div>
+ 
+
