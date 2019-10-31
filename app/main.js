@@ -1,7 +1,5 @@
 const {
   app,
-  dialog,
-  ipcMain,
   BrowserWindow,
 } = require('electron')
 const path = require('path')
@@ -22,10 +20,16 @@ const app_config = {
 let mainWindow;
 
 function appInit() {
+
+  /**
+   * Linux only
+   */
+  if (process.platform != 'linux') app.quit()
+
   DownloadMgr.register({
     downloadFolder: PACKAGE_DIR
   });
-
+  
   createWindow()
   ipcCtrl(app_config)
 }
@@ -64,7 +68,7 @@ function createSplashWindow() {
 function createWindow() {
   splashWindow = createSplashWindow()
   mainWindow = new BrowserWindow({
-    width: 800,
+    width: 740,
     height: 600,
     parent: true,
     show: false,
@@ -75,7 +79,7 @@ function createWindow() {
 
   mainWindow.setTitle(app_config.APP_NAME)
   mainWindow.loadFile( path.join(VIEW_DIR, 'index.html') )
-  mainWindow.webContents.openDevTools()
+  // mainWindow.webContents.openDevTools()
   mainWindow.on('close', function () {
     mainWindow = null;
   })

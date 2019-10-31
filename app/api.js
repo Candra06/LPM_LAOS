@@ -30,6 +30,28 @@ class API_LPM {
     })
   }
 
+  /**
+   * Detail Package
+   */
+  detailPackage(packageName) {
+    return new Promise ((resolve, reject) => {
+      const req = net.request(this.getQueryBuilder('detail.php', `name=${packageName}`))
+      req.on('response', (res) => {
+        res.on('data', (body) => {
+          resolve(JSON.parse(body))
+        })
+        res.on('error', (err) => {
+          reject(err)
+        })
+      })
+      req.end()
+    })
+  }
+
+  /**
+   * Get Download link
+   * 
+   */
   downloadPackage(packageName) {
     return new Promise ((resolve, reject) => {
       const req = net.request( this.getQueryBuilder('mirror.php', `name=${packageName}`) )

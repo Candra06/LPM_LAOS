@@ -1,0 +1,66 @@
+<div class="row">
+  <div class="btn-group" role="group" aria-label="Basic example">
+    <a href="#/" ng-route="/" class="btn btn-secondary">Aplikasi</a>
+    <a href="#/installed" ng-route="/installed" class="btn btn-secondary">Terinstal</a>
+    <a href="#/etc" ng-route="/etc" class="btn btn-secondary">Lainnya</a>
+  </div>
+</div>
+<form role="form" id="search_form" name="search_form">
+  <div class="form-group">
+    <div class="input-group">
+      <input id="search-query" class="form-control" type="text" name="query" ng-model="query" placeholder="Nama package"
+        required />
+      <span class="input-group-btn">
+        <button id="searchBtn" class="btn btn-warning" ng-disabled="search_form.query.$invalid" ng-init="searching = false" ng-click="searchHandler()" ng-model="searchBtn" type="submit">
+          <div ng-If="searching">
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...
+          </div>
+          <div ng-If="!searching">
+            <i class="fa fa-search" aria-hidden="true"></i> Cari
+          </div>
+        </button>
+      </span>
+    </div>
+  </div>
+</form>
+<div class="row">
+  <div ng-If="loading" class="col-lg-12">
+    <div class="d-flex justify-content-center">
+      <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-12" ng-If="search_form.$submitted || result">
+    <div class="alert alert-success" ng-If="result.status" role="alert">
+      {{ result.message }}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="card mb-3" ng-If="result.status">
+      <div class="card-body">
+        <h5 class="card-title">{{ result.data.name }}</h5>
+        <p class="card-subtitle">Keyword: {{ result.data.keyword }}</p>
+        <p class="card-text">{{ result.data.description }}</p>
+        <a href="#/detail/{{ result.data.name }}" class="btn btn-primary">Detail <i class="fa fa-arrow-right"></i></a>
+        <hr>
+        <p class="card-header">Related apps: <span class="badge badge-info">{{ result.data.related_results.length }}</span></p>
+        <ul class="list-group list-group-flush" ng-repeat="app in result.data.related_results">
+          <li class="list-group-item">
+            <button class="btn btn-sm" ng-click="searchThis($index)">
+              {{ app }}
+              <i class="text-blue fa fa-search"></i>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div ng-If="!result.status" class="alert alert-danger" role="alert">
+      {{ result.message }}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  </div>
+</div>

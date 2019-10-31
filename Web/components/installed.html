@@ -17,8 +17,9 @@
   </nav>
 <div class="row">
   <div class="col-lg-12">
-    <h1>Installed List <small>(<span ng-bind="totalInstalled"></span> packages)</small></h1>
+    <h3>Installed List <small>(<span ng-bind="totalInstalled"></span> packages)</small></h3>
     <input class="form-control" type="search" ng-model="query" placeholder="filter packages..." aria-label="filter packages" />
+    <hr>
     <div class="table-responsive">
       <table class="table table-striped">
         <thead class="thead-dark">
@@ -32,7 +33,7 @@
         </thead>
         <tbody>
           <tr ng-repeat="app in packages | filter: query">
-            <td>{{ $index + 1}}</td>
+            <td>{{ $index + 1 }}</td>
             <td>{{ app.split('/')[0] }}</td>
             <td>{{ app.split('/')[1].split(' ')[1] }}</td>
             <td>{{ app.split('/')[1].split(' ')[2] }}</td>
@@ -41,12 +42,6 @@
         </tbody>
       </table>
     </div>
-    <!-- <ul ng-repeat="app in packages | filter: query">
-      <li>{{ app }}</li>
-      <li ng-if="results.length === 0">
-        <strong>No results found...</strong>
-      </li>
-    </ul> -->
   </div>
 </div>
 
