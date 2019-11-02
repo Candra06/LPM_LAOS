@@ -24,6 +24,13 @@ lpm.controller('homeController', function ($scope) {
   ipcRenderer.send('online-check', window.navigator.onLine ? 'on' : 'off')
 })
 
+
+  searchBtn.on('click', (e) => {
+    e.preventDefault()
+    searchQuery = $('#search-query').val() //document.getElementById('search-query').value;
+    ipcRenderer.send('search-app', searchQuery)
+    searchBtn.html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...')
+
 /**
  * Search controller
  * untuk pencarian package / app
@@ -50,8 +57,14 @@ lpm.controller('searchController', function ($scope, $rootScope) {
       $scope.searchHandler()
     }
     $rootScope.$apply()
+
   })
 })
+
+
+  ipcRenderer.on('search-app', (e, res) => {
+    console.log(res)
+    searchBtn.html(oriSearchBtn)
 
 /**
  * Detail packages
@@ -68,6 +81,7 @@ lpm.controller('detailController', function($scope, $routeParams, $rootScope) {
     $scope.result = res
     $scope.loading = false
     $rootScope.$apply()
+
   })
 
   $scope.sendDownloadQueue = function () {

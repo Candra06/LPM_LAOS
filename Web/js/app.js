@@ -17,6 +17,11 @@ lpm.config(['$routeProvider', '$locationProvider', function ($route, $locationPr
     controller: 'installedController'
   })
 
+
+  .when('/detail', {
+    templateUrl: path.join(view, 'installed.html'),
+    controller: 'installedController'
+
   .when('/search', {
     templateUrl: path.join(view, 'search.html'),
     controller: 'searchController'
@@ -25,6 +30,7 @@ lpm.config(['$routeProvider', '$locationProvider', function ($route, $locationPr
   .when('/detail/:appName', {
     templateUrl: path.join(view, 'detail.html'),
     controller: 'detailController'
+
   })
 
   .when('/downloads', {
