@@ -10,7 +10,7 @@ class Notif {
     let notifInfo = new Notification({
       title: title == null ? this.config.APP_NAME : title,
       body: message,
-      image: path.join(view_dir, 'img', 'jumbo.jpg')
+      image: path.join(this.view_dir, 'img', 'jumbo.jpg')
     })
     notifInfo.show()
     return notifInfo

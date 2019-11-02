@@ -2,22 +2,22 @@ const {
   app,
   BrowserWindow,
 } = require('electron')
-const path = require('path')
-const DownloadMgr = require('electron-download-manager')
-const Notif = require(path.join(__dirname, 'notification.js'))
+const fs    = require('fs')
+const dwm   = require('electron-download-manager')
+const path  = require('path')
 const ipcCtrl = require(path.join(__dirname, 'ipcCtrl.js'))
 
-var APP_DIR = app.getPath('userData')
-var PACKAGE_DIR = path.join(APP_DIR, 'archive')
-var VIEW_DIR = path.resolve(__dirname, '..', 'Web')
-
 const app_config = {
-  APP_DIR: APP_DIR,
+  APP_DIR: app.getPath('userData'),
   APP_NAME: 'Laos Package Manager',
-  API_URL: 'https://lpm-api.zhanang.id'
+  API_URL: 'https://lpm-api.zhanang.id',
+  PACKAGE_DIR: path.join(app.getPath('downloads'), 'alldebs'),
+  VIEW_DIR: path.resolve(__dirname, '..', 'Web')
 }
 
-let mainWindow;
+console.log(app_config)
+
+let mainWindow, splashWindow;
 
 function appInit() {
 
@@ -25,13 +25,22 @@ function appInit() {
    * Linux only
    */
   if (process.platform != 'linux') app.quit()
+  
+  // Create archive dir.
+  if (!fs.existsSync(app_config.PACKAGE_DIR)) fs.mkdirSync(app_config.PACKAGE_DIR);
 
-  DownloadMgr.register({
-    downloadFolder: PACKAGE_DIR
+  // download manager
+  dwm.register({
+    downloadFolder: app_config.PACKAGE_DIR
   });
   
+  createSplashWindow()
   createWindow()
-  ipcCtrl(app_config)
+  ipcCtrl({
+    app_config,
+    dwm,
+    mainWindow
+  })
 }
 
 
@@ -51,7 +60,7 @@ function createSplashWindow() {
     position: 'center',
     
   })
-  splashWindow.loadFile(path.join(VIEW_DIR, 'splash.html'))
+  splashWindow.loadFile(path.join(app_config.VIEW_DIR, 'splash.html'))
   splashWindow.webContents.on('did-finish-load', () => {
     splashWindow.show()
   })
@@ -59,14 +68,12 @@ function createSplashWindow() {
     splashWindow = null;
   })
 
-  return splashWindow
 }
 
 /**
  * Main Window
  */
 function createWindow() {
-  splashWindow = createSplashWindow()
   mainWindow = new BrowserWindow({
     width: 740,
     height: 600,
@@ -77,13 +84,15 @@ function createWindow() {
     }
   })
 
+  app.setName(app_config.APP_NAME)
+  app.setAppLogsPath(path.resolve(app_config.VIEW_DIR, 'img/logo.png'))
   mainWindow.setTitle(app_config.APP_NAME)
-  mainWindow.loadFile( path.join(VIEW_DIR, 'index.html') )
+  mainWindow.loadFile( path.join(app_config.VIEW_DIR, 'index.html') )
   // mainWindow.webContents.openDevTools()
   mainWindow.on('close', function () {
     mainWindow = null;
   })
-
+  
   mainWindow.webContents.on('did-finish-load', () => {
     setTimeout(() => {
       splashWindow != null ? splashWindow.close() : null

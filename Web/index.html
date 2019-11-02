@@ -11,7 +11,15 @@
     <title>Laos Package Manager</title>
 </head>
 <body ng-cloak>
-    <div class="container" ng-view>
+    <div class="container">
+        <div class="row">
+            <div class="btn-group" role="group">
+                <a href="#/" ng-route="/" class="btn btn-secondary">Aplikasi</a>
+                <a href="#/installed" ng-route="/installed" class="btn btn-secondary">Terinstal</a>
+                <a href="#/downloads" ng-route="/downloads" class="btn btn-secondary">Downloads</a>
+            </div>
+        </div>
+        <div ng-view></div>
     </div>
 
     <script>window.fn = window.$ = window.jQuery = require('jquery')</script>
