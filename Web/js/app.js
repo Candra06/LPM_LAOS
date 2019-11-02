@@ -33,5 +33,10 @@ lpm.config(['$routeProvider', '$locationProvider', function ($route, $locationPr
 
   })
 
+  .when('/downloads', {
+    templateUrl: path.join(view, 'downloads.html'),
+    controller: 'downloadController'
+  })
+
   .otherwise({ redirectTo: '/' })
 }])

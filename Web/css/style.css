@@ -35,3 +35,21 @@ body {
     margin-right: auto;
     width: 40vw;
 }
+
+.c-pointer {
+    cursor: pointer;
+}
+
+.download-box {
+    box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.35)
+}
+.download-box .content {
+    position: relative;
+}
+
+.download-box .content span {
+    font-weight: bold;
+    position: absolute;
+    right: 5px;
+    top: 20px;
+}

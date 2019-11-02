@@ -52,7 +52,7 @@ class API_LPM {
    * Get Download link
    * 
    */
-  downloadPackage(packageName) {
+  getAllDebLink(packageName) {
     return new Promise ((resolve, reject) => {
       const req = net.request( this.getQueryBuilder('mirror.php', `name=${packageName}`) )
       req.on('response', (res) => {
