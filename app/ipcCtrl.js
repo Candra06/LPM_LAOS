@@ -103,6 +103,7 @@ function ipcCtrl (conf) {
         })
         // move from progressStorage to historyStorage
         download.progress.delete(packageName)
+        listDownload(e)
       }
     }
     API.getAllDebLink(packageName).then(dwnHandler).catch(errHandler)

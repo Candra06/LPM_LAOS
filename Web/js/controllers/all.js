@@ -85,17 +85,13 @@ lpm.controller('downloadController', function($scope, $rootScope) {
     for (x in res.progress) pro.push(res.progress[x])
     $scope.history = his
     $scope.progress = pro
-    console.log(pro)
     $rootScope.$apply()
   })
 
   ipcRenderer.on('download-progress', (e, res) => {
     let p = [];
-    for (x in res) {
-      p.push(res[x])
-    }
+    for (x in res) p.push(res[x])
     $scope.progress = p;
-    // for (y in $scope.progress) console.log(y)
     $rootScope.$apply()
   })
 
