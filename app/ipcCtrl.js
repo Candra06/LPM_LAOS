@@ -232,8 +232,6 @@ function ipcCtrl (conf) {
       })
     })
 
-    deleteFolderRecursive(extractPath)
-
     installationLog.set(appName, installLog)
   })
 
