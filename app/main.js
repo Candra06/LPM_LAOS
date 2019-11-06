@@ -1,5 +1,6 @@
 const {
   app,
+  shell,
   BrowserWindow,
 } = require('electron')
 const fs    = require('fs')
@@ -12,7 +13,8 @@ const app_config = {
   APP_NAME: 'Laos Package Manager',
   API_URL: 'https://lpm-api.zhanang.id',
   PACKAGE_DIR: path.join(app.getPath('downloads'), 'alldebs'),
-  VIEW_DIR: path.resolve(__dirname, '..', 'Web')
+  VIEW_DIR: path.resolve(__dirname, '..', 'Web'),
+  TEMP_DIR: path.resolve(app.getPath("temp"), "lpm")
 }
 
 console.log(app_config)
@@ -27,7 +29,9 @@ function appInit() {
   if (process.platform != 'linux') app.quit()
   
   // Create archive dir.
-  if (!fs.existsSync(app_config.PACKAGE_DIR)) fs.mkdirSync(app_config.PACKAGE_DIR);
+  if (!fs.existsSync(app_config.PACKAGE_DIR)) fs.mkdirSync(app_config.PACKAGE_DIR)
+  // Create temp dir. for installation
+  if (!fs.existsSync(app_config.TEMP_DIR)) fs.mkdirSync(app_config.TEMP_DIR)
 
   // download manager
   dwm.register({
@@ -39,6 +43,7 @@ function appInit() {
   ipcCtrl({
     app_config,
     dwm,
+    shell,
     mainWindow
   })
 }
@@ -75,7 +80,7 @@ function createSplashWindow() {
  */
 function createWindow() {
   mainWindow = new BrowserWindow({
-    width: 740,
+    width: 850,
     height: 600,
     parent: true,
     show: false,
@@ -85,8 +90,8 @@ function createWindow() {
   })
 
   app.setName(app_config.APP_NAME)
-  app.setAppLogsPath(path.resolve(app_config.VIEW_DIR, 'img/logo.png'))
   mainWindow.setTitle(app_config.APP_NAME)
+  mainWindow.setMenuBarVisibility(false)
   mainWindow.loadFile( path.join(app_config.VIEW_DIR, 'index.html') )
   // mainWindow.webContents.openDevTools()
   mainWindow.on('close', function () {

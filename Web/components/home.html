@@ -12,29 +12,19 @@
   </div>
 </form>
 
-<!-- <h1><small>Kategori</small></h1>
-<div class="row">
-
-  <div class="thumbnail col-3 bg-light text-center">
-    <p>Multimedia</p>
+<div ng-If="historyApp.length > 0">
+  <h3>App History</h3>
+  <div class="row">
+    <div class="col-4" ng-repeat="app in historyApp">
+      <div class="card bg-light mb-3">
+        <div class="card-header"><a href="#/detail/{{app.data.name}}">{{ app.data.name  }} <i class="fa fa-external-link"></i></a></div>
+        <div class="card-body">
+          <p class="card-text">{{ app.data.description.snapshot }}</p>
+        </div>
+        <div class="card-footer">
+          <button class="btn btn-danger" ng-click="removeHistory(app.data.name)"><i class="fa fa-trash"></i></button>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <div class="thumbnail col-3 bg-light text-center">
-    <p>Office</p>
-  </div>
-
-  <div class="thumbnail col-3 bg-light text-center">
-    <p>Office</p>
-  </div>
-
-  <div class="thumbnail col-3 bg-light text-center">
-    <p>Office</p>
-  </div>
-
-  <div class="thumbnail col-3 bg-light text-center">
-    <p>Office</p>
-  </div>
-  <div class="thumbnail col-3 bg-light text-center">
-    <p>Office</p>
-  </div>
-</div> -->
+</div>
