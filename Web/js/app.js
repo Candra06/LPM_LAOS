@@ -33,4 +33,5 @@ lpm.config(['$routeProvider', '$locationProvider', function ($route, $locationPr
   })
 
   .otherwise({ redirectTo: '/' })
+  
 }])
