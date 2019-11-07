@@ -20,8 +20,19 @@ var timeoutCallback = function() {
 /**
  * Home controller
  */
-lpm.controller('homeController', function ($scope) {
+lpm.controller('homeController', function ($scope, $rootScope) {
   ipcRenderer.send('online-check', window.navigator.onLine ? 'on' : 'off')
+  ipcRenderer.send('historyDetailApps');
+  ipcRenderer.on('historyDetailApps', (e, res) => {
+    let temp = [];
+    for (app in res) temp.push(res[app])
+    $scope.historyApp = temp;
+    $rootScope.$apply();
+  })
+
+  $scope.removeHistory = function(appname) {
+    ipcRenderer.send('deleteHistoryDetailApp', appname)
+  }
 })
 
 
@@ -94,24 +105,37 @@ lpm.controller('downloadController', function($scope, $rootScope) {
   
   ipcRenderer.send('download-list')
   ipcRenderer.on('download-list', (e, res) => {
+    if (typeof res == 'undefined' || res == null) return;
     let his = [], pro = [];
     for (x in res.history) his.push(res.history[x])
-    for (x in res.progress) pro.push(res.progress[x])
+    for (x in res.progress) pro.push(res.progress[x])    
     $scope.history = his
     $scope.progress = pro
-    console.log(pro)
     $rootScope.$apply()
   })
 
   ipcRenderer.on('download-progress', (e, res) => {
     let p = [];
-    for (x in res) {
-      p.push(res[x])
-    }
+    for (x in res) p.push(res[x])
     $scope.progress = p;
-    // for (y in $scope.progress) console.log(y)
     $rootScope.$apply()
   })
+
+  $scope.continueDownload = function(name) {
+    ipcRenderer.send('add-download', name)
+  }
+
+  $scope.cancelDownload = function(appName) {
+    ipcRenderer.send('cancel-download', appName);
+  }
+
+  $scope.showFileInFolder = function(savedPath) {
+    ipcRenderer.send('show-file', savedPath);
+  }
+
+  $scope.installApp = function(appName) {
+    ipcRenderer.send('installApp', appName)
+  }
 
   $scope.formatDate = function(unix) {
     return new Date(unix).toLocaleDateString('id-ID');

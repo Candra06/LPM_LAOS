@@ -1,0 +1,11 @@
+{
+    "dest": "out/",
+    "icon": "Web/img/logo.png",
+    "categories": [
+      "Utility",
+      "Package Manager"
+    ],
+    "lintianOverrides": [
+      "changelog-file-missing-in-native-package"
+    ]
+}
