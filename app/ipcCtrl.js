@@ -187,7 +187,7 @@ function ipcCtrl (conf) {
   }
 
   ipcMain.on('show-file', (e, savedPath) => {
-    if (! fs.existsSync(savedPath)) {} return errHandler("File tidak ditemukan, mungkin sudah terhapus")
+    if (! fs.existsSync(savedPath)) return errHandler("File tidak ditemukan, mungkin sudah terhapus")
     conf.shell.showItemInFolder(savedPath)
   })
 
