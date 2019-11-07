@@ -17,7 +17,10 @@ const app_config = {
   TEMP_DIR: path.resolve(app.getPath("temp"), "lpm")
 }
 
-console.log(app_config)
+module.paths.push(path.resolve('node_modules'));
+module.paths.push(path.resolve('../node_modules'));
+module.paths.push(path.resolve(__dirname, '..', '..', '..', '..', 'resources', 'app', 'node_modules'));
+module.paths.push(path.resolve(__dirname, '..', '..', '..', '..', 'resources', 'app.asar', 'node_modules'));
 
 let mainWindow, splashWindow;
 
